@@ -1,6 +1,7 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.UI;
 
 public class SocialDistancingController : MonoBehaviour
 {
@@ -10,7 +11,10 @@ public class SocialDistancingController : MonoBehaviour
     public AudioClip Siren;
     public AudioClip Beep;
 
+    public Text DistanceText;
+
     private AudioSource audioData;
+
 
     void OnTriggerEnter(Collider collision)
     {
@@ -23,6 +27,12 @@ public class SocialDistancingController : MonoBehaviour
             audioData = GetComponent<AudioSource>();
             audioData.clip = Siren;
             audioData.Play();
+
+            if (DistanceText != null)
+            {
+                DistanceText.text = "Distance: TOO CLOSE";
+                DistanceText.gameObject.GetComponent<Text>().color = Color.red;
+            }
         }
     }
 
@@ -37,6 +47,12 @@ public class SocialDistancingController : MonoBehaviour
             audioData = GetComponent<AudioSource>();
             audioData.clip = Beep;
             audioData.Play();
+
+            if (DistanceText != null)
+            {
+                DistanceText.text = "Distance: GOOD";
+                DistanceText.gameObject.GetComponent<Text>().color = Color.green;
+            }
         }
     }
 }
